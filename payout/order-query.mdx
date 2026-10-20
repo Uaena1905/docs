@@ -1,0 +1,51 @@
+---
+title: "代付订单查询"
+sidebarTitle: "订单查询"
+---
+
+<div className="api-endpoint">
+  <span className="api-method api-method-post">POST</span>
+  <code className="api-path">https://{"{测试/线上环境域名}"}/payout/checkpayout.php</code>
+</div>
+
+### 代付查询
+
+<div className="api-table-wrap">
+
+| 请求连接 | 请求方式 | 授权 |
+| --- | --- | --- |
+| https://{"{测试/线上环境域名}"}/payout/checkpayout.php | POST |  |
+
+</div>
+
+### 请求参数
+
+<div className="api-table-wrap">
+
+| 参数名称 | 是否必传 | 类型 | 最大长度 | 描述 |
+| --- | --- | --- | --- | --- |
+| appId | 是 | String | 32 | UD后台的appId |
+| payOrder | 是 | String | 32 | UD订单号 |
+| ctime | 是 | String | 11 | 时间(秒) |
+| sign | 是 | String | 64 | 签名 |
+
+</div>
+
+### 响应结果
+
+```json
+{
+    "status": 3,
+    "msg": "代付已经出成功"
+}
+```
+
+### 结果说明
+
+<div className="api-table-wrap">
+
+| 字段说明 | 类型 | 最大长度 | 描述 |
+| --- | --- | --- | --- |
+| status | int | 11 | 1 in create 2 in process 3 success 4 fail |
+
+</div>

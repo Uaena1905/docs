@@ -1,54 +1,96 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mintlify Starter Kit",
+  "name": "UgameDeal",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#2563EB",
+    "light": "#60A5FA",
+    "dark": "#1D4ED8"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "/favicon.png",
+  "appearance": {
+    "default": "light"
+  },
+  "fonts": {
+    "family": "Inter",
+    "heading": {
+      "family": "Inter",
+      "weight": 650
+    },
+    "body": {
+      "family": "Inter"
+    }
+  },
+  "icons": {
+    "library": "lucide"
+  },
+  "background": {
+    "color": {
+      "light": "#FFFFFF",
+      "dark": "#0B1220"
+    }
+  },
+  "styling": {
+    "eyebrows": "section",
+    "codeblocks": {
+      "theme": {
+        "light": "github-light",
+        "dark": "github-dark"
+      }
+    }
+  },
   "navigation": {
-    "pages": [
+    "languages": [
       {
-        "group": "Getting Started",
+        "language": "zh-CN",
+        "default": true,
         "pages": [
-          "index",
-          "quickstart"
+          {
+            "group": "快速开始",
+            "pages": [
+              "index",
+              "config"
+            ]
+          },
+          {
+            "group": "代付接口",
+            "pages": [
+              "payout/apply",
+              "payout/async-callback",
+              "payout/order-query"
+            ]
+          },
+          {
+            "group": "支付方式",
+            "pages": [
+              "payout/methods/global",
+              "payout/methods/korea",
+              "payout/methods/vietnam",
+              "payout/methods/indonesia",
+              "payout/methods/malaysia",
+              "payout/methods/pakistan",
+              "payout/methods/egypt",
+              "payout/methods/thailand",
+              "payout/methods/philippines"
+            ]
+          },
+          {
+            "group": "产品介绍",
+            "pages": [
+              "payout/intro"
+            ]
+          }
         ]
       }
     ],
     "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
-        }
-      ]
+      "anchors": []
     }
   },
   "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
-  },
-  "navbar": {
-    "links": [
-      {
-        "label": "Support",
-        "href": "mailto:support@mintlify.com"
-      }
-    ],
-    "primary": {
-      "type": "button",
-      "label": "Dashboard",
-      "href": "https://app.mintlify.com"
-    }
+    "light": "/logo/ugamedeal-logo.png",
+    "dark": "/logo/ugamedeal-logo.png",
+    "href": "/"
   },
   "contextual": {
     "options": [
@@ -64,9 +106,9 @@
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+      "x": "#",
+      "github": "#",
+      "linkedin": "#"
     }
   }
 }

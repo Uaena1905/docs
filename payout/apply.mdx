@@ -1,0 +1,66 @@
+---
+title: "代付支付下单接口"
+sidebarTitle: "支付下单接口"
+description: "商户发起代付请求，调用 UD 平台完成代付下单。"
+---
+
+<div className="api-endpoint">
+  <span className="api-method api-method-post">POST</span>
+  <code className="api-path">https://{"{测试/线上环境域名}"}/payout/applypayout.php</code>
+</div>
+
+### 订单创建
+
+<div className="api-table-wrap">
+
+| 请求连接 | 请求方式 | 授权 |
+| --- | --- | --- |
+| https://{"{测试/线上环境域名}"}/payout/applypayout.php | POST | 商户发起付款信息调用通知 UD 平台取得付款链接 |
+
+</div>
+
+### 请求参数
+
+<div className="api-table-wrap">
+
+| 参数名称 | 是否必传 | 类型 | 最大长度 | 描述 |
+| --- | --- | --- | --- | --- |
+| appId | 是 | String | 32 | UD后台的appId |
+| body | 否 | String | 128 | 备注 |
+| merchantOrder | 是 | String | 32 | 商户订单号（确保唯一） |
+| price | 是 | String | 10 | 元 |
+| payCallbackUrl | 是 | String | 256 | 商户支付回调url |
+| name | 是 | String | 256 | 账号名称，支持英文 |
+| currencyCode | 是 | String | 12 | 支付的币种（如 KRW） |
+| email | 是 | String | 64 | 邮箱 |
+| phone | 是 | String | 64 | 手机号码 |
+| userId | 是 | String | 32 | 商户用户ID |
+| ctime | 是 | int | 13 | 时间戳（秒） |
+| sign | 是 | String | 128 | 签名规则：[查看配置与签名文档](/config) |
+| payChannel | 是 | String | 32 | 支付方式代码 |
+| accountNo | 是 | String | 64 | 卡号/iban |
+| firstName | 否 | String | 64 | 客户英文名称-前 |
+| arfirstName | 否 | String | 64 | 客户阿拉伯文名称-前 |
+
+</div>
+
+### 响应结果
+
+```json
+{
+    "status": 1,
+    "payOrder": oytxad8832848  UD订单号,
+    "msg": "代付已经申请"
+}
+```
+
+### 结果说明
+
+<div className="api-table-wrap">
+
+| 字段说明 | 类型 | 最大长度 | 描述 |
+| --- | --- | --- | --- |
+| status | int | 11 | 1 表示授权成功，0 失败 |
+| payOrder | String | 64 | UD的订单号 |
+
+</div>

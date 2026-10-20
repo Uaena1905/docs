@@ -1,0 +1,123 @@
+---
+title: "签名算法"
+sidebarTitle: "配置与签名"
+description: "UgameDeal API 签名算法说明，包含 PHP 与 Java 示例。"
+---
+
+### PHP 生成签名
+
+推送参数除 sign 所有参数参与签名验证。
+
+```php
+/**
+ * @param $dataArr 参与签名的数组
+ * @return string 签名字符串
+ */
+function createSignStr($dataArr){
+    $signature = '';
+    ksort($dataArr);
+    foreach ($dataArr as $value) {
+        $signature .= trim($value);
+    }
+    return base64_encode($signature);
+}
+
+/**
+ * @param $dataStr 签名base64_encode字符串
+ * @param $signKey 签名的key
+ * 使用hash_hmac sha256的算法签名得到结果后转化成小写
+ */
+function hash256($dataStr, $signKey){
+    $createSgin = hash_hmac("sha256", $dataStr, $signKey);
+    return strtolower($createSgin);
+}
+```
+
+### Java 生成签名
+
+```java
+import java.net.URLEncoder;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import javax.crypto.Mac;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
+import java.nio.charset.StandardCharsets;
+import java.security.InvalidKeyException;
+
+public class SignUtils {
+    
+    public static String encrypt(String input, String key) {
+        String cipher = "";
+        try {
+            byte[] data = key.getBytes(StandardCharsets.UTF_8);
+            // 根据给定的字节数组构造一个密钥，第二个参数指定一个密钥的算法名称，生成HmacSHA1专属密钥
+            SecretKey secretKey = new SecretKeySpec(data, "HmacSHA256");
+            // 生成一个指定Mac算法的Mac对象
+            Mac mac = Mac.getInstance("HmacSHA256");
+            // 用给定密钥初始化Mac对象
+            mac.init(secretKey);
+            byte[] text = input.getBytes(StandardCharsets.UTF_8);
+            byte[] encryptByte = mac.doFinal(text);
+            cipher = bytesToHexStr(encryptByte);
+        } catch (NoSuchAlgorithmException | InvalidKeyException e) {
+            e.printStackTrace();
+        }
+        return cipher;
+    }
+
+    /**
+     * byte数组转16进制字符串
+     *
+     * @param bytes byte数组
+     * @return hex字符串
+     */
+    public static String bytesToHexStr(byte[] bytes) {
+        StringBuilder hexStr = new StringBuilder();
+        for (byte b : bytes) {
+            String hex = Integer.toHexString(b & 0xFF);
+            if (hex.length() == 1) {
+                hex = '0' + hex;
+            }
+            hexStr.append(hex);
+        }
+        return hexStr.toString();
+    }
+
+    /*
+     * 接收所有的参数排序并且拼接成字符串
+     */
+    public static String getToString(Map<String, String> params) {
+        StringBuffer buffer = new StringBuffer();
+        List<String> keys = new ArrayList<String>(params.keySet());
+        Collections.sort(keys);
+        for (int i = 0; i < keys.size(); i++) {
+            String key = keys.get(i);
+            if (key.equals("sign")) {
+                continue;
+            }
+            String value = (String) params.get(key);
+            value = value.trim(); // 去掉value的两边空格
+            if (value != null && value.length() > 0) {
+                buffer.append(value);
+            }
+        }
+        String value = buffer.toString();
+        Base64.Encoder encoder = Base64.getEncoder();
+        String encoded = encoder.encodeToString(value.getBytes());
+        return encoded;
+    }
+
+    /*
+     * 生成签名的算法
+     */
+    public static String createSign(Map<String, String> params, String Key) {
+        String tosign = getToString(params);
+        return encrypt(tosign, Key);
+    }
+}
+```

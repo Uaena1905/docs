@@ -1,0 +1,427 @@
+/* UgameDeal — HaiPay-inspired Mintlify layout refinements
+   Observed HaiPay traits (REA): mint theme, white canvas, thin gray borders,
+   purple accent (we keep UgameDeal blue), Inter, left sidebar + right TOC,
+   scrollable API tables, soft active nav pills. */
+
+:root {
+  --ud-primary: #2563eb;
+  --ud-primary-soft: #eff6ff;
+  --ud-primary-text: #1d4ed8;
+  --ud-ink: #111827;
+  --ud-muted: #6b7280;
+  --ud-border: #e5e7eb;
+  --ud-surface: #ffffff;
+  --ud-zebra: #f9fafb;
+  --ud-radius: 8px;
+  --ud-mono: ui-monospace, SFMono-Regular, "JetBrains Mono", Menlo, Monaco, Consolas, monospace;
+}
+
+/* --- Top bar: slightly tighter, hairline bottom edge --- */
+#navbar {
+  border-bottom: 1px solid var(--ud-border);
+  background: var(--ud-surface);
+}
+
+/* Search bar: align to the right, next to theme toggle */
+#navbar div:has(> #search-bar-entry) {
+  justify-content: flex-end !important;
+  flex: 0 0 auto !important;
+  margin-left: auto;
+  max-width: 16rem;
+}
+
+#navbar div:has(> #search-bar-entry) + div {
+  flex: 0 0 auto !important;
+  margin-left: 0.5rem !important;
+}
+
+#search-bar-entry {
+  width: 14rem !important;
+  max-width: 14rem !important;
+}
+
+/* --- Sidebar typography: match HaiPay (same size for links; color marks active) --- */
+#sidebar-content {
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+#sidebar-content a,
+#sidebar-content li > a {
+  font-size: 0.875rem !important;
+  font-weight: 400 !important;
+  line-height: 1.5;
+}
+
+/* Group titles (快速开始 / 代付接口…): slightly emphasized, same base size */
+#sidebar-content .font-semibold,
+#sidebar-content [class*="font-semibold"],
+#sidebar-content h5,
+#sidebar-content button {
+  font-size: 0.875rem !important;
+  font-weight: 600 !important;
+  line-height: 1.5;
+}
+
+/* Active item: HaiPay-style soft pill — color + bg, not heavier weight */
+#sidebar-content li[data-active] > a,
+#sidebar-content a[aria-current="page"] {
+  background-color: var(--ud-primary-soft) !important;
+  border-radius: 0.5rem;
+  color: var(--ud-primary-text) !important;
+  font-size: 0.875rem !important;
+  font-weight: 500 !important;
+}
+
+#sidebar-content li[data-active] > a:hover,
+#sidebar-content a[aria-current="page"]:hover {
+  background-color: var(--ud-primary-soft) !important;
+  color: var(--ud-primary-text) !important;
+}
+
+.dark #sidebar-content li[data-active] > a,
+.dark #sidebar-content a[aria-current="page"] {
+  background-color: rgba(37, 99, 235, 0.18) !important;
+  color: #93c5fd !important;
+}
+
+/* --- API endpoint strip (replaces heavy gradient card) --- */
+.api-endpoint {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem 0.85rem;
+  margin: 1rem 0 1.5rem;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--ud-border);
+  border-radius: var(--ud-radius);
+  background: var(--ud-zebra);
+}
+
+.api-method {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 3.75rem;
+  padding: 0.22rem 0.55rem;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  line-height: 1.2;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.api-method-post {
+  background: var(--ud-primary);
+}
+
+.api-method-callback {
+  background: #0f766e;
+}
+
+.api-path {
+  flex: 1 1 14rem;
+  font-family: var(--ud-mono);
+  font-size: 0.84rem;
+  font-weight: 500;
+  color: var(--ud-ink);
+  word-break: break-all;
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+/* --- Tables: HaiPay-like — open layout, wrap text, no horizontal scrollbar --- */
+
+/* Disable Mintlify table scroller */
+#content-area .overflow-x-auto,
+#content-area .overflow-auto,
+#content-area [class*="overflow-x-auto"] {
+  overflow-x: visible !important;
+  max-width: 100%;
+}
+
+/* No card/box around tables — just clean row rules like HaiPay */
+.pay-table-wrap,
+.api-table-wrap,
+.scene-table-wrap {
+  width: 100%;
+  max-width: 100%;
+  overflow: visible;
+  margin: 1rem 0 1.75rem;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+}
+
+#content-area table,
+.pay-table-wrap table,
+.api-table-wrap table,
+.scene-table-wrap table {
+  margin: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  table-layout: fixed;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+#content-area th,
+#content-area td,
+.pay-table-wrap th,
+.api-table-wrap th,
+.scene-table-wrap th,
+.pay-table-wrap td,
+.api-table-wrap td,
+.scene-table-wrap td {
+  padding: 0.9rem 1.25rem !important;
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  border-bottom: 1px solid var(--ud-border) !important;
+  vertical-align: middle;
+  text-align: left;
+  font-size: 0.875rem;
+  line-height: 1.65;
+  color: #374151;
+  white-space: normal !important;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* First / last column: keep edge flush with content */
+#content-area th:first-child,
+#content-area td:first-child,
+.pay-table-wrap th:first-child,
+.api-table-wrap th:first-child,
+.scene-table-wrap th:first-child,
+.pay-table-wrap td:first-child,
+.api-table-wrap td:first-child,
+.scene-table-wrap td:first-child {
+  padding-left: 0 !important;
+}
+
+#content-area th:last-child,
+#content-area td:last-child,
+.pay-table-wrap th:last-child,
+.api-table-wrap th:last-child,
+.scene-table-wrap th:last-child,
+.pay-table-wrap td:last-child,
+.api-table-wrap td:last-child,
+.scene-table-wrap td:last-child {
+  padding-right: 0 !important;
+}
+
+/* Header: bold ink, no gray fill */
+.pay-table-wrap tr:first-child th,
+.api-table-wrap tr:first-child th,
+.scene-table-wrap tr:first-child th,
+.pay-table-wrap thead th,
+.api-table-wrap thead th,
+.scene-table-wrap thead th,
+#content-area thead th,
+#content-area tr:first-child th {
+  background: transparent !important;
+  color: #111827;
+  font-size: 0.875rem;
+  font-weight: 650;
+  letter-spacing: 0;
+  text-transform: none;
+  white-space: normal !important;
+  border-bottom: 1px solid #d1d5db !important;
+}
+
+/* API param tables: full width, balanced columns; short cols centered */
+.api-table-wrap table {
+  width: 100% !important;
+  table-layout: fixed;
+}
+
+.api-table-wrap table th:nth-child(1),
+.api-table-wrap table td:nth-child(1) {
+  width: 20%;
+  text-align: left;
+}
+
+.api-table-wrap table th:nth-child(2),
+.api-table-wrap table td:nth-child(2),
+.api-table-wrap table th:nth-child(3),
+.api-table-wrap table td:nth-child(3),
+.api-table-wrap table th:nth-child(4),
+.api-table-wrap table td:nth-child(4) {
+  width: 14%;
+  text-align: center;
+}
+
+.api-table-wrap table th:nth-child(5),
+.api-table-wrap table td:nth-child(5) {
+  width: 38%;
+  text-align: left;
+}
+
+.pay-table-wrap td:last-child {
+  font-family: var(--ud-mono);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--ud-primary-text);
+}
+
+.pay-table-wrap tr:last-child td,
+.api-table-wrap tr:last-child td,
+.scene-table-wrap tr:last-child td,
+#content-area tbody tr:last-child td {
+  border-bottom: none !important;
+}
+
+.pay-table-wrap tbody tr:hover td,
+.api-table-wrap tbody tr:hover td,
+.scene-table-wrap tbody tr:hover td {
+  background: transparent;
+}
+
+/* Tall payment lists only: vertical scroll, still no card chrome */
+.pay-table-wrap {
+  max-height: min(70vh, 42rem);
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-right: 0.25rem;
+}
+
+/* --- Content rhythm (center column) --- */
+#content-area article h1 {
+  letter-spacing: -0.02em;
+  color: var(--ud-ink);
+}
+
+#content-area article h2 {
+  margin-top: 2.25rem;
+  margin-bottom: 0.85rem;
+  letter-spacing: -0.015em;
+  color: var(--ud-ink);
+  font-weight: 650;
+}
+
+#content-area article h3 {
+  margin-top: 1.75rem;
+  margin-bottom: 0.65rem;
+  letter-spacing: -0.01em;
+  color: var(--ud-ink);
+  font-weight: 650;
+  /* Soft accent bar like section markers — not heavy left border */
+  padding-left: 0;
+  border-left: none;
+}
+
+#content-area article p {
+  color: #4b5563;
+  line-height: 1.75;
+}
+
+#content-area article pre {
+  border-radius: var(--ud-radius) !important;
+  border: 1px solid var(--ud-border);
+}
+
+#content-area article code:not(pre code) {
+  font-family: var(--ud-mono);
+  font-size: 0.85em;
+}
+
+/* --- Dark mode --- */
+.dark {
+  --ud-border: #1f2937;
+  --ud-surface: #0b1220;
+  --ud-zebra: #111827;
+  --ud-ink: #f3f4f6;
+  --ud-muted: #9ca3af;
+  --ud-primary-soft: #172554;
+  --ud-primary-text: #93c5fd;
+}
+
+.dark #navbar {
+  background: #0b1220;
+  border-bottom-color: #1f2937;
+}
+
+.dark .api-endpoint {
+  background: #111827;
+  border-color: #1f2937;
+}
+
+.dark .api-path {
+  color: #e5e7eb;
+}
+
+.dark .pay-table-wrap,
+.dark .api-table-wrap,
+.dark .scene-table-wrap {
+  background: transparent;
+  border: none;
+}
+
+.dark .pay-table-wrap tr:first-child th,
+.dark .api-table-wrap tr:first-child th,
+.dark .scene-table-wrap tr:first-child th,
+.dark .pay-table-wrap thead th,
+.dark .api-table-wrap thead th,
+.dark .scene-table-wrap thead th,
+.dark #content-area thead th,
+.dark #content-area tr:first-child th {
+  background: transparent !important;
+  color: #e5e7eb;
+  border-bottom-color: #374151 !important;
+}
+
+.dark .pay-table-wrap th,
+.dark .api-table-wrap th,
+.dark .scene-table-wrap th,
+.dark .pay-table-wrap td,
+.dark .api-table-wrap td,
+.dark .scene-table-wrap td {
+  border-bottom-color: #1f2937;
+  color: #d1d5db;
+}
+
+.dark .pay-table-wrap td:last-child {
+  color: #93c5fd;
+}
+
+.dark .pay-table-wrap tbody tr:hover td,
+.dark .api-table-wrap tbody tr:hover td,
+.dark .scene-table-wrap tbody tr:hover td {
+  background: #111827;
+}
+
+.dark #content-area article h1,
+.dark #content-area article h2,
+.dark #content-area article h3 {
+  color: #f9fafb;
+}
+
+.dark #content-area article p {
+  color: #9ca3af;
+}
+
+.dark #content-area article pre {
+  border-color: #1f2937;
+}
+
+/* Narrow screens: full-bleed tables, compact endpoint */
+@media (max-width: 768px) {
+  .api-endpoint {
+    padding: 0.65rem 0.75rem;
+  }
+
+  .pay-table-wrap,
+  .api-table-wrap,
+  .scene-table-wrap {
+    border-radius: 6px;
+  }
+
+  .pay-table-wrap {
+    max-height: 60vh;
+  }
+}
