@@ -1,0 +1,43 @@
+---
+title: "Async payout callback"
+sidebarTitle: "Async callback"
+description: "After a payout succeeds, UD notifies your server of the payment result asynchronously."
+---
+
+### Callback request parameters
+
+<div className="api-table-wrap">
+
+| Parameter | Required | Type | Max length | Description |
+| --- | --- | --- | --- | --- |
+| isSuccess | Yes | number | 1 | Payout result (`1` = success, `2` = failure) |
+| merchantOrderId | Yes | String | 128 | Merchant order ID |
+| ctime | Yes | int | 13 | Timestamp (seconds) |
+| payOrder | Yes | String | 64 | UD order ID |
+| sign | Yes | String |  | Signature rules: [Config and signature](/en/config) |
+| currencyCode | Yes | String | 12 | Order currency |
+| price | Yes | String | 10 | Order amount |
+
+</div>
+
+### Callback response
+
+After receiving the UD payment callback, the merchant must return JSON:
+
+```json
+{
+    "status": 1,
+    "msg": "success"
+}
+```
+
+### Callback response codes
+
+<div className="api-table-wrap">
+
+| Parameter | Description |
+| --- | --- |
+| status | `1` means the merchant received the callback and started fulfillment processing; any other value means fulfillment failed (defined by the merchant) |
+| msg | Merchant message |
+
+</div>

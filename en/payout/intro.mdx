@@ -1,0 +1,42 @@
+---
+title: "Payout product overview"
+sidebarTitle: "Payout product overview"
+description: "UgameDeal payout (Payout / Disbursement) — digital disbursement solution"
+---
+
+## 1. What is payout (merchant view)
+
+UgameDeal payout (Payout / fund disbursement): Through the UD API, merchants transfer funds from their platform merchant account directly to a designated payee’s local bank card or e-wallet (players, KOLs, suppliers, and others), without manually operating online banking.
+
+- **Fund flow**: Merchant UD account → payee bank card / local wallet
+- **Supported parties**: B2C (individual players / KOLs) | B2B (suppliers / channels)
+- **Coverage**: Multi-country local banks + e-wallets (for example, mainstream Southeast Asia / South Asia corridors)
+- **Integration**: HTTPS + IP whitelist + parameter signature (MD5 / RSA_SHA256)
+- **Modes**: Single payout + batch payout + async callback + order query
+
+## 2. Typical payout scenarios (games / overseas business)
+
+| Scenario | Description | Characteristics |
+| --- | --- | --- |
+| Player balance withdrawal / original-path refund | Player rebates from game Web Shop top-ups, or balance withdrawals to a local bank card / wallet | High frequency, small amounts, time-sensitive settlement |
+| KOL / streamer / promoter commission payout | Weekly or monthly commission to influencers and affiliates | Batch payout; payout proof required |
+| Tournament prizes / campaign rewards | Direct cash prizes for esports winners or check-in lottery rewards | One-time batch; clear remarks |
+| Supplier / channel settlement | Settlement payments to local publishers or art vendors | B2B payout; larger amounts; T+N |
+| Customer service compensation / mistaken-charge refund | Compensation credited after a verified player complaint | Must link order ID; auditable |
+
+## 3. How to use payout
+
+- **Onboarding**: Contact the UgameDeal business team to enable payout permissions
+- **Integration**: Connect via API; single and batch payout are supported
+- **Security**: HTTPS encryption + IP whitelist + parameter signature verification
+- **Settlement time**: Typically real-time to T+1 business day, depending on channel and region
+- **Fees**: Per-transaction fee or percentage-based fee; contact the business team for rates
+
+## Related docs
+
+For more technical details on payout, see:
+
+- [Payout — Create order](/en/payout/apply)
+- [Payout — Async callback](/en/payout/async-callback)
+- [Payout methods — Global](/en/payout/methods/global)
+- [Config and signature](/en/config)

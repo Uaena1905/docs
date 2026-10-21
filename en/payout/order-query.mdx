@@ -1,0 +1,51 @@
+---
+title: "Payout order query"
+sidebarTitle: "Order query"
+---
+
+<div className="api-endpoint">
+  <span className="api-method api-method-post">POST</span>
+  <code className="api-path">https://{"{test/production domain}"}/payout/checkpayout.php</code>
+</div>
+
+### Payout query
+
+<div className="api-table-wrap">
+
+| Request URL | Method | Authorization |
+| --- | --- | --- |
+| https://{"{test/production domain}"}/payout/checkpayout.php | POST |  |
+
+</div>
+
+### Request parameters
+
+<div className="api-table-wrap">
+
+| Parameter | Required | Type | Max length | Description |
+| --- | --- | --- | --- | --- |
+| appId | Yes | String | 32 | appId from the UD console |
+| payOrder | Yes | String | 32 | UD order ID |
+| ctime | Yes | String | 11 | Timestamp (seconds) |
+| sign | Yes | String | 64 | Signature |
+
+</div>
+
+### Response
+
+```json
+{
+    "status": 3,
+    "msg": "代付已经出成功"
+}
+```
+
+### Response fields
+
+<div className="api-table-wrap">
+
+| Field | Type | Max length | Description |
+| --- | --- | --- | --- |
+| status | int | 11 | `1` in create, `2` in process, `3` success, `4` fail |
+
+</div>

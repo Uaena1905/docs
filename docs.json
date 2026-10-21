@@ -81,6 +81,46 @@
             ]
           }
         ]
+      },
+      {
+        "language": "en",
+        "pages": [
+          {
+            "group": "Getting started",
+            "pages": [
+              "en/index",
+              "en/config"
+            ]
+          },
+          {
+            "group": "Payout APIs",
+            "pages": [
+              "en/payout/apply",
+              "en/payout/async-callback",
+              "en/payout/order-query"
+            ]
+          },
+          {
+            "group": "Payment methods",
+            "pages": [
+              "en/payout/methods/global",
+              "en/payout/methods/korea",
+              "en/payout/methods/vietnam",
+              "en/payout/methods/indonesia",
+              "en/payout/methods/malaysia",
+              "en/payout/methods/pakistan",
+              "en/payout/methods/egypt",
+              "en/payout/methods/thailand",
+              "en/payout/methods/philippines"
+            ]
+          },
+          {
+            "group": "Product",
+            "pages": [
+              "en/payout/intro"
+            ]
+          }
+        ]
       }
     ],
     "global": {
